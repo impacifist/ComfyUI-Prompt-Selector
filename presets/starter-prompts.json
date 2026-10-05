@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "camera-static",
+      "name": "Camera · Locked shot",
+      "text": "Keep the camera stationary. Preserve the opening viewpoint and framing throughout the shot.",
+      "tags": "camera, static, I2V",
+      "favorite": true
+    },
+    {
+      "id": "camera-push",
+      "name": "Camera · Gentle push-in",
+      "text": "The camera moves slowly forward toward the subject, keeping the same viewing angle.\n\nPreserve the subject's appearance, clothing, and the existing background. Keep the movement continuous.",
+      "tags": "camera, motion, I2V",
+      "favorite": true
+    },
+    {
+      "id": "light-window",
+      "name": "Lighting · Window daylight",
+      "text": "Soft daylight enters from the left. Preserve natural skin tones and subtle shadows.",
+      "tags": "lighting, daylight, portrait",
+      "favorite": true
+    },
+    {
+      "id": "product-studio",
+      "name": "Product · Studio tabletop",
+      "text": "A ceramic mug on a clean tabletop, with soft side lighting, a neutral background, and a clear product silhouette.",
+      "tags": "product, studio, still life",
+      "favorite": false
+    },
+    {
+      "id": "portrait-soft",
+      "name": "Portrait · Soft daylight",
+      "text": "A relaxed portrait in soft daylight, with a simple background and natural expression.",
+      "tags": "portrait, daylight",
+      "favorite": false
+    },
+    {
+      "id": "ko-static",
+      "name": "가이드 · 고정 구도",
+      "text": "카메라 위치와 구도를 유지한다. 지정한 대상의 동작만 자연스럽게 이어진다.",
+      "tags": "카메라, 고정, 영상",
+      "favorite": false
+    },
+    {
+      "id": "ko-background",
+      "name": "배경 · 미니멀 스튜디오",
+      "text": "단순한 밝은 배경과 부드러운 조명. 제품의 형태와 색상이 명확하게 보이는 구도.",
+      "tags": "배경, 제품, 스튜디오",
+      "favorite": false
+    }
+  ],
+  "selected_id": null,
+  "draft": {
+    "name": "",
+    "text": "",
+    "tags": ""
+  },
+  "deleted": null
+}

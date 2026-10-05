@@ -1,0 +1,41 @@
+.prompt-selector {
+    box-sizing: border-box; display: flex; flex-direction: column; gap: 9px;
+    width: 100%; height: 100%; min-height: 470px; overflow: auto;
+    padding: 12px; border: 1px solid #3a4353; border-radius: 10px;
+    background: #19202a; color: #e7edf6; font: 13px/1.45 system-ui, sans-serif;
+    --ps-accent: #88d9c6;
+}
+.prompt-selector * { box-sizing: border-box; }
+.prompt-selector .ps-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.prompt-selector .ps-heading strong { font-size: 15px; letter-spacing: .02em; }
+.prompt-selector .ps-count { color: var(--ps-accent); font-size: 12px; }
+.prompt-selector .ps-row { display: flex; gap: 6px; align-items: center; }
+.prompt-selector input, .prompt-selector textarea, .prompt-selector select {
+    min-width: 0; width: 100%; border: 1px solid #465267; border-radius: 6px;
+    padding: 8px; background: #111722; color: #f0f4fa; font: inherit;
+}
+.prompt-selector input:focus, .prompt-selector textarea:focus, .prompt-selector select:focus {
+    outline: 2px solid var(--ps-accent); outline-offset: 1px;
+}
+.prompt-selector input::placeholder, .prompt-selector textarea::placeholder { color: #8e9cb2; }
+.prompt-selector .ps-list { height: 100px; flex: 0 0 100px; padding: 3px; }
+.prompt-selector .ps-list option { padding: 5px 7px; border-radius: 4px; }
+.prompt-selector .ps-list option:checked { background: #315568; color: white; }
+.prompt-selector label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #b8c5d9; }
+.prompt-selector .ps-editor-label { flex: 1 0 125px; min-height: 125px; }
+.prompt-selector textarea { flex: 1; min-height: 100px; resize: vertical; line-height: 1.55; }
+.prompt-selector button {
+    border: 1px solid #4c5970; border-radius: 6px; padding: 7px 9px;
+    background: #293449; color: #eff4fb; font: inherit; cursor: pointer; white-space: nowrap;
+}
+.prompt-selector button:hover { background: #3a4b66; }
+.prompt-selector button:focus-visible { outline: 2px solid var(--ps-accent); outline-offset: 2px; }
+.prompt-selector button:disabled { opacity: .4; cursor: default; }
+.prompt-selector button.ps-primary { background: #88d9c6; border-color: #88d9c6; color: #112b29; font-weight: 700; }
+.prompt-selector button.ps-danger { color: #ffafad; }
+.prompt-selector button[aria-pressed="true"] { border-color: #ffd37b; color: #ffd37b; }
+.prompt-selector .ps-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.prompt-selector .ps-status { min-height: 19px; color: #88d9c6; font-size: 12px; white-space: pre-wrap; }
+.prompt-selector .ps-status[data-error="true"] { color: #ffafad; }
+.prompt-selector .ps-help { color: #9daec7; font-size: 11px; }
+.prompt-selector .ps-footer { border-top: 1px solid #364257; padding-top: 8px; }

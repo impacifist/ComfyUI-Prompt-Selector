@@ -1,0 +1,10 @@
+{
+  "name": "comfyui-prompt-selector",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/library.test.js"
+  }
+}
