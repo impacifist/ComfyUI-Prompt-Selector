@@ -6,7 +6,6 @@
 
 ![공개 예제로 구성한 Prompt Selector](docs/images/prompt-library.png)
 
-위 이미지는 별도 테스트 환경에서 공개용 예제만 넣어 촬영했습니다. 개인 작업 화면이나 개인 프롬프트는 포함하지 않았습니다.
 
 ## 주요 기능
 
