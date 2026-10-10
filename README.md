@@ -4,6 +4,8 @@ A reusable prompt library inside a ComfyUI node. Save variations, update existin
 
 [한국어 사용 설명](README.ko.md)
 
+Version 1.0.1 refreshes the editor layout immediately on node resize, preventing the input area from retaining its previous height.
+
 ![Prompt Selector with public demo prompts](docs/images/prompt-library.png)
 
 Screenshots use a separate test session and the bundled public examples. The current node interface is in Korean.
@@ -79,7 +81,7 @@ node --test tests/library.test.js
 node --check web/prompt_selector.js
 ```
 
-Browser verification requires Playwright and a separate local ComfyUI test instance. See [screenshot provenance](docs/SCREENSHOTS.md).
+Browser verification requires Playwright and a separate local ComfyUI test instance. Run `python tests/browser_resize.py --artifacts test-artifacts/resize` against an isolated instance on port 8198 to check Canvas and Vue resizing. See [screenshot provenance](docs/SCREENSHOTS.md).
 
 ## License
 

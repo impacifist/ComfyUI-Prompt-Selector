@@ -4,6 +4,8 @@
 
 [English](README.md)
 
+v1.0.1: 노드를 리사이즈할 때 편집기 높이를 즉시 다시 계산하여 입력창이 이전 크기에 머무는 문제를 수정했습니다.
+
 ![공개 예제로 구성한 Prompt Selector](docs/images/prompt-library.png)
 
 

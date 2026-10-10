@@ -306,6 +306,10 @@ function installEditor(node) {
     // Frontend 1.52.7 reuses stale Vue DOM on undo unless this UI-only render key changes.
     const widget = node.addDOMWidget("prompt_selector_editor", `PROMPT_SELECTOR_EDITOR_${newId()}`, root, {
         serialize: false, hideOnZoom: false, getMinHeight: () => 650,
+        afterResize: () => {
+            // Refresh the DOM allocation even when the canvas has cached the old layout.
+            if (node.graph) node.arrange?.();
+        },
     });
     widget.serialize = false;
     widget.options.serialize = false;
