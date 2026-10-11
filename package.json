@@ -1,7 +1,7 @@
 {
   "name": "comfyui-prompt-selector",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "type": "module",
   "scripts": {

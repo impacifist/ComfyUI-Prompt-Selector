@@ -4,7 +4,7 @@ A reusable prompt library inside a ComfyUI node. Save variations, update existin
 
 [한국어 사용 설명](README.ko.md)
 
-Version 1.0.1 refreshes the editor layout immediately on node resize, preventing the input area from retaining its previous height.
+Version 1.1.0 adds draggable handles to resize the prompt list and editor independently.
 
 ![Prompt Selector with public demo prompts](docs/images/prompt-library.png)
 
@@ -65,6 +65,8 @@ Try [the shared-library workflow](examples/shared-library.json). Sharing is loca
 
 ## Storage and output details
 
+Drag the horizontal handle below the prompt list or editor to change its height. Double-click a handle to restore its default height. With a handle focused, use Up/Down to resize or Home to reset. Heights are saved per node in the workflow and do not change other nodes' preferences. If larger panes exceed the node's height, scroll inside the node or enlarge the node itself. The editor follows the node height automatically until you resize its handle, and resumes automatic sizing after a reset.
+
 - **Current editor contents are the output**, including unsaved changes. Selecting a saved entry fills the editor.
 - The library is embedded in workflow JSON. Saved library edits synchronize across nodes; each node retains its own selection and unsaved draft.
 - Sorting changes the displayed order and is saved per node in the workflow.
@@ -81,7 +83,7 @@ node --test tests/library.test.js
 node --check web/prompt_selector.js
 ```
 
-Browser verification requires Playwright and a separate local ComfyUI test instance. Run `python tests/browser_resize.py --artifacts test-artifacts/resize` against an isolated instance on port 8198 to check Canvas and Vue resizing. See [screenshot provenance](docs/SCREENSHOTS.md).
+Browser verification requires Playwright and a separate local ComfyUI test instance. Run `python tests/browser_resize.py --artifacts test-artifacts/resize` against an isolated instance on port 8198 to check Canvas and Vue resizing. Run `python tests/browser_panes.py --artifacts test-artifacts/panes` to exercise the pane handles, zoom, persistence, undo/redo and cancellation. The pane test serves the checkout's frontend files to the isolated browser without modifying the installed node. See [screenshot provenance](docs/SCREENSHOTS.md).
 
 ## License
 

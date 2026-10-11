@@ -29,6 +29,87 @@ function element(tag, className, text) {
     return item;
 }
 
+function resizeHandle(node, target, property, minimum, label) {
+    const handle = element("div", "ps-resizer");
+    handle.tabIndex = 0;
+    handle.setAttribute("role", "separator");
+    handle.setAttribute("aria-orientation", "horizontal");
+    handle.setAttribute("aria-label", label);
+    handle.title = `${label} · 위아래로 드래그 / 방향키 · 더블클릭: 기본 높이`;
+    let drag = null;
+
+    function apply() {
+        const height = node.properties?.[property];
+        if (Number.isFinite(height) && height >= minimum) {
+            target.style.height = `${height}px`;
+            target.style.flex = `0 0 ${height}px`;
+        } else {
+            target.style.removeProperty("height");
+            target.style.removeProperty("flex");
+        }
+    }
+
+    function beginChange() {
+        node.graph?.beforeChange?.();
+        app.canvas?.emitBeforeChange?.();
+    }
+
+    function endChange() {
+        node.graph?.afterChange?.();
+        app.canvas?.emitAfterChange?.();
+        node.setDirtyCanvas?.(true, true);
+    }
+
+    function setHeight(height) {
+        node.properties ||= {};
+        if (height === null) delete node.properties[property];
+        else node.properties[property] = Math.max(minimum, Math.round(height));
+        apply();
+    }
+
+    handle.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 || drag) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const bounds = target.getBoundingClientRect();
+        beginChange();
+        drag = { id: event.pointerId, y: event.clientY, height: target.offsetHeight,
+            scale: bounds.height / target.offsetHeight, previous: node.properties?.[property] };
+        handle.setPointerCapture(event.pointerId);
+    });
+    handle.addEventListener("pointermove", (event) => {
+        if (!drag || drag.id !== event.pointerId) return;
+        event.preventDefault();
+        event.stopPropagation();
+        setHeight(drag.height + (event.clientY - drag.y) / drag.scale);
+    });
+    function finish(event) {
+        if (!drag || drag.id !== event.pointerId) return;
+        event.stopPropagation();
+        if (event.type === "pointercancel") setHeight(drag.previous ?? null);
+        drag = null;
+        if (handle.hasPointerCapture(event.pointerId)) handle.releasePointerCapture(event.pointerId);
+        endChange();
+    }
+    for (const event of ["pointerup", "pointercancel", "lostpointercapture"]) handle.addEventListener(event, finish);
+    handle.addEventListener("dblclick", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        beginChange();
+        setHeight(null);
+        endChange();
+    });
+    handle.addEventListener("keydown", (event) => {
+        if (!["ArrowUp", "ArrowDown", "Home"].includes(event.key)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        beginChange();
+        setHeight(event.key === "Home" ? null : target.offsetHeight + (event.key === "ArrowUp" ? -20 : 20));
+        endChange();
+    });
+    return { handle, apply };
+}
+
 function installEditor(node) {
     const storage = node.widgets?.find((widget) => widget.name === "library_json");
     if (!storage || controllers.has(node)) return;
@@ -90,7 +171,10 @@ function installEditor(node) {
     fileInput.type = "file";
     fileInput.accept = ".json,application/json";
     fileInput.hidden = true;
-    root.append(heading, searchRow, sortLabel, list, nameLabel, tagsLabel, editorLabel, actions, files, status, help, fileInput);
+    const listResize = resizeHandle(node, list, "prompt_selector_list_height", 80, "목록 높이 조절");
+    const editorResize = resizeHandle(node, editorLabel, "prompt_selector_editor_height", 125, "입력창 높이 조절");
+    root.append(heading, searchRow, sortLabel, list, listResize.handle, nameLabel, tagsLabel,
+        editorLabel, editorResize.handle, actions, files, status, help, fileInput);
 
     function message(text, error = false) {
         status.textContent = text;
@@ -226,6 +310,8 @@ function installEditor(node) {
     }
 
     function reload() {
+        listResize.apply();
+        editorResize.apply();
         try {
             state = parseState(storage.value);
             invalid = false;
