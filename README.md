@@ -4,7 +4,7 @@ A reusable prompt library inside a ComfyUI node. Save variations, update existin
 
 [한국어 사용 설명](README.ko.md)
 
-Version 1.1.0 adds draggable handles to resize the prompt list and editor independently.
+Version 1.1.1 uses ComfyUI's Canvas low-zoom placeholder instead of keeping the HTML editor visible when zoomed far out. Zoom back in to edit; your selection, library and unsaved draft remain intact. Vue node mode handles its own scaling. Version 1.1.0 added independent list/editor resize handles.
 
 ![Prompt Selector with public demo prompts](docs/images/prompt-library.png)
 
